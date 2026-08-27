@@ -1,0 +1,50 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live unauthenticated probes of the two reachable RuhAN endpoints, plus a search of
+  every public RuhAN page for an authentication, API-key or OAuth reference. No OpenAPI
+  exists to derive securitySchemes from -- derive-authentication.py returned 0 profiles.
+schemes: []
+scheme_count: 0
+api_keys_issued: false
+oauth2: false
+openid_connect: false
+mutual_tls: false
+end_user_auth:
+  present: false
+  note: >-
+    /onboarding collects a user type and a primary need with a KVKK consent checkbox, but
+    it is a profile form, not a login. It states the data "yayina cikista Supabase profil
+    kaydina tasinir" (will be moved to a Supabase profile record at launch) -- i.e. the
+    identity store is not yet wired. /api/health confirms supabaseConfigured=false.
+endpoints:
+- endpoint: https://www.ruhan.co/api/health
+  method: GET
+  auth_required: false
+  observed_status: 200
+  note: Returns JSON to an anonymous caller with no credential of any kind.
+- endpoint: https://www.ruhan.co/api/lead
+  methods_allowed:
+  - OPTIONS
+  - POST
+  auth_required: unknown
+  observed_status: 204
+  note: >-
+    Allow header read from an OPTIONS preflight (204). GET returns 405. Whether POST
+    demands a credential was NOT tested, because a POST here would submit a real lead
+    into the provider's system; unknown is recorded rather than guessed.
+cors:
+  access_control_allow_origin: '*'
+  observed_on: https://www.ruhan.co/
+  note: >-
+    The site root returns a wildcard CORS origin. This is a static-asset posture on
+    Vercel, not an API authorization decision, and is recorded as an observation only.
+note: >-
+  RuhAN publishes no authentication mechanism: no API keys, no OAuth, no OIDC discovery
+  (/.well-known/openid-configuration and /.well-known/oauth-authorization-server both
+  404), and no developer key issuance anywhere on the site. Both reachable endpoints are
+  open. Server-side secrets exist but are for an OUTBOUND integration, not an inbound one:
+  /odeme names IYZIPAY_URI, IYZIPAY_API_KEY and IYZIPAY_SECRET_KEY as environment
+  variables the server will hold to call iyzico. Those are RuhAN's credentials at a
+  payment processor, not credentials RuhAN issues to API consumers, and no value is
+  disclosed.

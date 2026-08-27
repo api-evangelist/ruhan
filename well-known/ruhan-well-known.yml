@@ -1,0 +1,38 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Direct unauthenticated HTTPS probes of every /.well-known/ path in the enrichment
+  contract against the single RuhAN host (www.ruhan.co). Every path returned 404 with
+  the Next.js "404: This page could not be found." HTML shell -- an honest 404 status,
+  not a soft-200. No pointer is emitted, because nothing is served.
+hosts:
+- host: www.ruhan.co
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+note: >-
+  0 of 8 well-known paths served a document. /security.txt at the site root is also 404.
+  No WellKnown or SecurityTxt pointer is wired into apis.yml -- a recorded absence is data,
+  not a presence.

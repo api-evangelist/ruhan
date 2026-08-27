@@ -1,0 +1,81 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Search of every reachable RuhAN page for a versioning, deprecation, SLA or status
+  policy, plus live probes of the platform's own endpoints.
+versioning:
+  scheme: none
+  strategy: unversioned
+  current_version: null
+  in_path: false
+  in_header: false
+  note: >-
+    The only API paths RuhAN exposes are /api/health and /api/lead. Neither carries a
+    version segment, and /api/v1 and /api/v1/openapi.json both 404. No versioning policy
+    is published.
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+sla:
+  published: false
+  url: null
+  uptime_target: null
+status_page:
+  published: false
+  url: null
+  note: >-
+    No status.ruhan.co, no statuspage.io/Instatus/BetterStack page, and no status link on
+    any RuhAN page. The platform does serve its own liveness endpoint (see health below),
+    but a liveness endpoint is not a status page: it reports the process, not incident
+    history, and nothing subscribes to it.
+health:
+  endpoint: https://www.ruhan.co/api/health
+  status: 200
+  method: GET
+  auth: none
+  content_type: application/json
+  fields_returned:
+  - ok
+  - app
+  - supabaseConfigured
+  - geminiConfigured
+  observed_2026_08_27:
+    ok: true
+    app: www.ruhan.co
+    supabaseConfigured: false
+    geminiConfigured: false
+  note: >-
+    Declared in the provider's own llms.txt as an important page. The endpoint is a real,
+    live, unauthenticated JSON surface. Its own payload reports that the platform's
+    database (Supabase) and model (Gemini) backends are NOT configured, which matches the
+    homepage form copy: "Bu form MVP omurgasidir. Supabase baglilysa talep kaydedilir;
+    Gemini baglilysa ilk on cevap uretilir." (This form is the MVP backbone. If Supabase
+    is connected the request is saved; if Gemini is connected a first preliminary answer
+    is generated.)
+maturity:
+  stage: pre-launch
+  evidence:
+  - url: https://www.ruhan.co/api/health
+    status: 200
+    signal: supabaseConfigured=false, geminiConfigured=false
+  - url: https://www.ruhan.co/odeme
+    status: 200
+    signal: 'Canli tahsilat kapali (live collection closed); iyzico still in application/sandbox preparation'
+  - url: https://www.ruhan.co/legal/iptal-iade
+    status: 200
+    signal: Page labels itself "Taslak metin" (draft text), pending counsel review
+  - url: https://www.ruhan.co/mevzuat
+    status: 404
+    signal: >-
+      Route is linked from the site's own primary navigation AND listed as an important
+      page in the provider's llms.txt, but returns 404.
+note: >-
+  RuhAN is an early-stage platform, not a deprecated one. Nothing here should be read as
+  decay: there is no versioning or deprecation policy because there is not yet a stable
+  contract to version. The one concrete defect worth reporting to the provider is that
+  /mevzuat -- advertised in llms.txt as an important page and linked from the site nav --
+  404s, which sends every agent that reads their llms.txt to a dead route.

@@ -1,0 +1,103 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live probes of every RuhAN host path in the enrichment contract, plus a read of every
+  reachable RuhAN page for a standards or compliance claim. Nothing is asserted that was
+  not observed.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returned 404; no OAuth flow is documented.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404.
+- id: openapi
+  conforms: false
+  evidence: >-
+    /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api/openapi.json,
+    /api/swagger.json, /api-docs, /docs and /redoc all returned 404 on www.ruhan.co.
+- id: asyncapi
+  conforms: false
+  evidence: /asyncapi.yaml returned 404; no event, webhook or streaming surface is published.
+- id: graphql
+  conforms: false
+  evidence: /graphql and /api/graphql both returned 404.
+- id: mcp
+  conforms: false
+  evidence: /mcp and /api/mcp both returned 404; no hosted or stdio MCP server is published.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json both returned 404.
+    No agent card exists and none was authored.
+- id: rfc9457
+  conforms: false
+  evidence: No problem+json error body was observed; GET /api/lead returns a bare 405.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header on any observed response.
+- id: rfc9116
+  conforms: false
+  evidence: /.well-known/security.txt and /security.txt both returned 404.
+- id: llmstxt
+  conforms: true
+  evidence: >-
+    https://www.ruhan.co/llms.txt returns 200 text/plain, 763 bytes, in valid llms.txt
+    form -- an H1 name, a prose summary, a primary URL, topic and important-page lists,
+    and a citation-preference section. Saved verbatim to llms/ruhan-llms.txt. This is the
+    only machine-readable document RuhAN publishes, and the platform advertises it on its
+    own homepage as part of an "AI Otorite Bilgi Merkezi" (AI authority knowledge centre).
+  defect: >-
+    One of the three pages it lists as important, /mevzuat, returns 404. An llms.txt that
+    routes agents to a dead page is worse than a shorter one that does not.
+- id: idempotency
+  conforms: false
+  evidence: See conventions/ruhan-conventions.yml -- no idempotency key is accepted or documented.
+- id: pagination
+  conforms: false
+  evidence: Neither reachable endpoint returns a collection.
+- id: hsts
+  conforms: true
+  evidence: 'strict-transport-security: max-age=63072000 on every observed response (two years).'
+domain_standard:
+  market: Turkish mining, licensing and underground sciences
+  standard_declared: false
+  candidates_checked:
+  - id: ogc-wms
+    conforms: false
+    evidence: >-
+      The /map page CONSUMES third-party OGC/ArcGIS services -- a WMS at ahocevar.com and
+      an ArcGIS REST protected-areas service at cbs1.tarimorman.gov.tr (Turkish Ministry
+      of Agriculture and Forestry). Those are other organisations' endpoints, not RuhAN's,
+      and are recorded here only so a later round does not misattribute them. RuhAN
+      publishes no WMS, WFS, WMTS or OGC API surface of its own.
+  - id: stac
+    conforms: false
+    evidence: >-
+      /odeme names "STAC/COG paketi" as a planned digital-delivery product, which is a
+      real domain-standard intent (SpatioTemporal Asset Catalog + Cloud-Optimized GeoTIFF)
+      for a remote-sensing platform. It is a product description on a page whose commerce
+      flow is not live, not a served catalog: no /stac, /catalog or collection endpoint
+      exists. Recorded as intent, scored as absent.
+  - id: mapeg
+    conforms: false
+    evidence: >-
+      MAPEG (Maden ve Petrol Isleri Genel Mudurlugu, the Turkish mining regulator) is the
+      regulatory regime this platform's entire workflow is built around, and RuhAN's
+      content references its legislation directly. MAPEG publishes no machine-readable API
+      or exchange schema for licence data, so there is no domain contract available for
+      RuhAN to conform to. Reward-only: this is not a penalty, and no conformance was
+      invented to fill the slot.
+compliance:
+  certifications_published: []
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS or equivalent certification is claimed anywhere.
+    probe-security-programs.py returned vdp=none trust=none -- no vulnerability disclosure
+    programme and no trust centre. What RuhAN does publish is a Turkish regulatory
+    compliance set aimed at consumers, not integrators: KVKK (Turkey's personal-data law,
+    /legal/kvkk), a privacy policy, terms of use, a distance-sales contract, a
+    pre-information form, a cancellation-refund policy and a digital-delivery/licence
+    page. All seven are labelled "Taslak metin" (draft text) and state they will be
+    finalised before launch with counsel review and iyzico's onboarding requirements.
+    No Compliance pointer is wired into apis.yml: a draft consumer policy set is not a
+    published compliance programme.

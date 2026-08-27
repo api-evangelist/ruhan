@@ -1,0 +1,33 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live unauthenticated requests to the two reachable RuhAN HTTP endpoints on
+  2026-08-27, plus a search of every public RuhAN page for a documented limit.
+limit_count: 0
+documented: false
+enforcement_observed: false
+response_headers: []
+retry_after: null
+exhaustion_status: null
+observations:
+- endpoint: GET https://www.ruhan.co/api/health
+  status: 200
+  content_type: application/json
+  rate_limit_headers: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header present on the response.
+    Served through Vercel; only Vercel platform headers (x-vercel-cache, x-vercel-id,
+    strict-transport-security, cache-control, vary) are returned.
+- endpoint: OPTIONS https://www.ruhan.co/api/lead
+  status: 204
+  allow: OPTIONS, POST
+  rate_limit_headers: []
+  note: >-
+    Preflight only. The endpoint was not exercised with a POST, because POSTing would
+    submit a real lead into the provider's system.
+note: >-
+  RuhAN documents no rate limits anywhere on its public surface and returns no
+  rate-limit signalling headers on either reachable endpoint. Any limiting in force is
+  therefore Vercel's platform-level DDoS protection, which is invisible to a client until
+  it fires. limit_count is an honest zero: it means "checked, none published", not
+  "not checked". An agent calling this platform has no runtime budget signal to read.

@@ -1,0 +1,100 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live probes of https://www.ruhan.co/api/health and https://www.ruhan.co/api/lead plus a
+  read of every reachable RuhAN page. No OpenAPI exists to derive from; every field below
+  is either observed on the wire or read from a provider page, and everything unobserved
+  is recorded as absent rather than assumed.
+surface:
+  api_root: https://www.ruhan.co/api
+  endpoints_known: 2
+  discovery: >-
+    /api/health is named in the provider's own llms.txt. /api/lead is not documented
+    anywhere public; it was found referenced in the site's client JavaScript bundle
+    (/_next/static/chunks/255-98a0bdaa30757bda.js) and then confirmed with an OPTIONS
+    preflight returning "allow: OPTIONS, POST".
+  hosting: "Vercel (server header: Vercel; x-vercel-id present on every response)"
+  framework: Next.js App Router (x-matched-path, x-nextjs-prerender, /_next/ asset tree)
+auth_style:
+  style: none
+  detail: Both reachable endpoints answer anonymously. See authentication/ruhan-authentication.yml.
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No idempotency key header is documented or accepted anywhere, and the one write
+    endpoint (/api/lead) advertises no de-duplication. An agent that retries a lead
+    submission after a timeout has no way to avoid creating a duplicate. No Idempotency
+    pointer is wired into apis.yml -- there is nothing to point at.
+pagination:
+  supported: false
+  style: null
+  request_params: []
+  response_fields: []
+  note: Neither reachable endpoint returns a collection.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: false
+request_id_tracing:
+  provider_header: null
+  platform_header: x-vercel-id
+  note: >-
+    RuhAN emits no first-party request id. x-vercel-id is set by the hosting platform and
+    is useful for a Vercel support ticket, not for correlating against a RuhAN-side log a
+    consumer can ask about.
+versioning:
+  style: unversioned
+  note: See lifecycle/ruhan-lifecycle.yml.
+error_envelope:
+  format: unknown
+  rfc9457: false
+  note: >-
+    No error body was observed. GET /api/lead returns 405 with an empty body and no
+    content-type. See errors handling in lifecycle/ and the absence of a problem-types
+    catalog -- there are no documented 4xx/5xx shapes to catalog.
+rate_limit_signaling:
+  headers: []
+  note: See rate-limits/ruhan-rate-limits.yml -- limit_count 0, no headers.
+content_negotiation:
+  response_content_types:
+  - application/json
+  note: /api/health returns application/json; charset=utf-8.
+reversibility:
+  grade: none
+  write_surface: true
+  note: >-
+    RuhAN has exactly one write surface -- POST /api/lead, the platform's MVP request
+    form -- and it exposes NO reversal operation of any kind: no cancel, no delete, no
+    withdraw, no amend, and no request-status endpoint from which a submitted request
+    could be found again. An agent that submits a lead cannot take it back through the
+    API. This is graded `none` rather than `na` because a write surface genuinely exists;
+    it is not graded `documented` because no reversal path exists to document.
+  operations: []
+  windows: []
+  commerce_policy:
+    url: https://www.ruhan.co/legal/iptal-iade
+    status: 200
+    reversal_documented: false
+    window_stated: false
+    note: >-
+      A cancellation-and-refund policy page exists but is explicitly a "Taslak metin"
+      (draft text) whose three clauses are written in the future tense -- conditions
+      "ayrilacak" (will be separated), the refund exception "acik yazilacak" (will be
+      written clearly), and refund timing "aciklanacak" (will be explained). NO window,
+      NO period and NO deadline is stated anywhere on it. None is asserted here: an
+      invented window is the one error in this pipeline that could cost a user money.
+      This page also governs a commerce flow that is not live -- /odeme states live
+      collection is closed.
+dry_run_mode:
+  supported: false
+  note: No sandbox, test mode or dry-run parameter is published. See the absence of a sandbox artifact.
+cross_references:
+- authentication/ruhan-authentication.yml
+- lifecycle/ruhan-lifecycle.yml
+- rate-limits/ruhan-rate-limits.yml
+- well-known/ruhan-well-known.yml

@@ -1,0 +1,71 @@
+generated: '2026-08-27'
+method: searched
+source: https://www.ruhan.co/pricing
+source_status: 200
+supporting_sources:
+- url: https://www.ruhan.co/odeme
+  status: 200
+  note: Payment and compliance centre -- states live collection is not yet open.
+- url: https://www.ruhan.co/magaza
+  status: 200
+  note: Store surface for map/report/equipment products.
+currency: null
+plan_count: 3
+plans_are_priced: false
+plans:
+- name: Madenci
+  slug: madenci
+  billing_period: monthly
+  price: null
+  currency: null
+  price_published: false
+  description_tr: Ruhsat takvimi, temel harita katmanlari, mevzuat uyarilari, evrak listeleri ve talep takibi.
+  description_en: >-
+    Mining licence calendar, base map layers, legislation alerts, document checklists
+    and request tracking.
+  included:
+  - Profil ve saha kayitlari (profile and field records)
+  - Ruhsat/bedel takvimi (licence and fee calendar)
+  - Kaynak gosterimli kontrol listeleri (source-cited checklists)
+  call_to_action: Talep olustur (create a request)
+- name: Saha Raporu
+  slug: saha-raporu
+  billing_period: one-time
+  price: null
+  currency: null
+  price_published: false
+  description_tr: Ihalelik, satin alinacak veya muracaat dusunulen alan icin kaynakli on degerlendirme.
+  description_en: >-
+    Source-cited preliminary assessment for a tender, acquisition or prospective
+    application area.
+  included:
+  - Koordinat/pafta kontrolu (coordinate and map-sheet check)
+  - Korunan alan ve sit taramasi (protected-area and heritage-site scan)
+  - Jeoloji/RS on yorumu (geology and remote-sensing preliminary interpretation)
+  call_to_action: Talep olustur (create a request)
+- name: Uzman Hizmet
+  slug: uzman-hizmet
+  billing_period: quote
+  price: null
+  currency: null
+  price_published: false
+  description_tr: YTK, CED, jeoloji, jeofizik, drone, nezaretci, proje ve hukuki danisman yonlendirmesi.
+  description_en: >-
+    Referral to YTK, EIA (CED), geology, geophysics, drone, site-supervisor, project and
+    legal-advisory providers.
+  included:
+  - Hizmet talebi (service request)
+  - Firma eslestirme (firm matching)
+  - Dosya ve maliyet takibi (file and cost tracking)
+  call_to_action: Talep olustur (create a request)
+api_plans: false
+api_metering: none
+note: >-
+  RuhAN publishes three named commercial tiers on /pricing but NO price, currency or
+  quota for any of them -- every tier ends in a "Talep olustur" (create a request) form
+  rather than a figure. /odeme states plainly that live collection is closed and the
+  iyzico integration is still awaiting sandbox and environment verification
+  ("Canli tahsilat kapali; sandbox ve Vercel env dogrulamasi bekliyor"), and the seven
+  /legal/* commerce documents are each labelled "Taslak metin" (draft text). None of the
+  three tiers is an API plan: there is no metered API product, no key issuance and no
+  developer tier. plans_are_priced is false by observation, not by omission.

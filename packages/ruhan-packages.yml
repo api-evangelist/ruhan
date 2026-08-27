@@ -1,0 +1,43 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  Registry searches against npm (registry.npmjs.org search API), PyPI
+  (pypi.org/pypi/ruhan/json -> 404), and the GitHub user/org search API, plus a read of
+  every reachable RuhAN page for an SDK, client library or download link.
+package_count: 0
+official_package_count: 0
+packages: []
+registries_checked:
+- registry: npm
+  query: ruhan
+  result: >-
+    Two unrelated packages returned (ruhan-prac, kami-redis); neither is published by
+    RuhAN or references ruhan.co. No first-party package.
+  status: 200
+- registry: pypi
+  query: ruhan
+  result: No such project.
+  status: 404
+- registry: github
+  query: ruhan in:login type:org
+  result: >-
+    19 accounts matched, all personal accounts belonging to individuals named Ruhan
+    (ruhang365, Ruhaniyat-Academy, ruhanww, Ruhanudd, ruhanraj, ...). None is the
+    ruhan.co mining platform, and none was attributed.
+  status: 200
+registries_not_checked:
+- Maven Central
+- NuGet
+- pkg.go.dev
+- RubyGems
+- Packagist
+- crates.io
+not_checked_reason: >-
+  RuhAN is a Next.js web platform with no developer programme and no SDK section on any
+  page. With npm, PyPI and GitHub all returning nothing first-party, and no provider page
+  naming a client library in any language, the remaining registries were not queried.
+note: >-
+  RuhAN ships no client libraries in any registry and no first-party GitHub organisation
+  could be identified. No SDKs pointer is wired into apis.yml, because sdk_count would be
+  a false presence: there is nothing to install. This is a genuine zero on a pre-launch
+  platform, not a stale or abandoned SDK -- there has never been one to decay.
