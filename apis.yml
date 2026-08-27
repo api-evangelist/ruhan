@@ -1,0 +1,33 @@
+aid: ruhan
+name: RuhAN
+type: Index
+kind: company
+visibility: Public
+description: RuhAN is a Turkish mining, underground sciences, geology, geophysics, GIS and remote-sensing platform, served
+  on ruhan.co.
+created: '2026-07-26'
+modified: '2026-08-27'
+specificationVersion: '0.23'
+tags:
+- Mining
+- Geology
+- Geophysics
+- GIS
+- Remote Sensing
+- Turkey
+apis:
+- name: RuhAN Platform
+  description: The declared apis.json at https://www.ruhan.co/apis.json returns 404. The site serves an llms.txt (763 bytes)
+    and nothing else machine-readable -- no OpenAPI, no well-known descriptor. Recorded as a platform with an agent-readable
+    index and NO API contract. Nothing was invented. Verified 2026-08-27.
+  humanURL: https://www.ruhan.co
+  baseURL: https://www.ruhan.co
+  tags:
+  - Mining
+  - Geology
+  - GIS
+  properties:
+  - type: LLMsTxt
+    url: https://www.ruhan.co/llms.txt
+  - type: Documentation
+    url: https://www.ruhan.co
