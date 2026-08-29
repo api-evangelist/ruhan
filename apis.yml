@@ -15,6 +15,17 @@ description: >-
   text. RuhAN publishes no OpenAPI, AsyncAPI, GraphQL SDL, MCP server or agent card. Its
   only machine-readable document is an llms.txt, and its only reachable HTTP surface is
   two undocumented endpoints -- GET /api/health and POST /api/lead.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.ruhan.co/brand/ruhan-crystal-mark.png
 created: '2026-07-26'
 modified: '2026-08-27'
