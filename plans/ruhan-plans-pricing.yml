@@ -69,3 +69,27 @@ note: >-
   /legal/* commerce documents are each labelled "Taslak metin" (draft text). None of the
   three tiers is an API plan: there is no metered API product, no key issuance and no
   developer tier. plans_are_priced is false by observation, not by omission.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Madenci
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Saha Raporu
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Uzman Hizmet
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
